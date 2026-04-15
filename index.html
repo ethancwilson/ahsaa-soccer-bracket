@@ -1,0 +1,2374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 AHSAA Boys Soccer - Area Standings &amp; Playoff Brackets</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eee; font-size: 13px; }
+  h1 { text-align: center; padding: 18px 10px 6px; color: #fff; font-size: 22px; letter-spacing: 1px; }
+  .subtitle { text-align: center; color: #aaa; font-size: 12px; padding-bottom: 4px; }
+  .updated { text-align: center; color: #666; font-size: 11px; padding-bottom: 14px; }
+  .tabs { display: flex; justify-content: center; gap: 6px; padding: 10px; flex-wrap: wrap; }
+  .tab { padding: 8px 22px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 13px;
+         background: #2c2c54; color: #aaa; border: 2px solid #444; transition: all .2s; }
+  .tab.active { background: #e63946; color: #fff; border-color: #e63946; }
+  .tab:hover:not(.active) { background: #3a3a6e; color: #fff; }
+  .section { display: none; padding: 10px 16px 30px; max-width: 1400px; margin: 0 auto; }
+  .section.active { display: block; }
+  .section-title { font-size: 18px; font-weight: bold; text-align: center; color: #f1c40f; padding: 10px 0 4px; letter-spacing: 1px; }
+  .deadline { text-align: center; color: #aaa; font-size: 11px; margin-bottom: 16px; }
+  .areas-grid { display: grid; gap: 10px; margin-bottom: 22px; }
+  .col2 { grid-template-columns: repeat(2, 1fr); }
+  .col4 { grid-template-columns: repeat(4, 1fr); }
+  @media(max-width:900px){.col4{grid-template-columns:repeat(2,1fr);}.col2{grid-template-columns:1fr;}}
+  .area-box { background: #16213e; border-radius: 8px; border: 1px solid #2c2c54; overflow: hidden; }
+  .area-header { background: #0f3460; padding: 6px 10px; font-weight: bold; font-size: 12px; color: #f1c40f; }
+  .area-table { width: 100%; border-collapse: collapse; }
+  .area-table th { background: #0a1931; color: #888; font-size: 10px; padding: 3px 6px; text-align: left; }
+  .area-table td { padding: 4px 6px; border-top: 1px solid #1e2a40; font-size: 11px; }
+  .area-table tr.winner td { color: #2ecc71; font-weight: bold; }
+  .area-table tr.runnerup td { color: #3498db; }
+  .badge-w  { display:inline-block; background:#2ecc71; color:#000; font-size:9px; border-radius:3px; padding:1px 4px; margin-left:4px; font-weight:bold; }
+  .badge-ru { display:inline-block; background:#3498db; color:#000; font-size:9px; border-radius:3px; padding:1px 4px; margin-left:4px; font-weight:bold; }
+  .badge-tbd{ display:inline-block; background:#e67e22; color:#000; font-size:9px; border-radius:3px; padding:1px 4px; margin-left:4px; font-weight:bold; }
+  .bracket-title { font-size:15px; font-weight:bold; text-align:center; color:#e0e0e0; margin:18px 0 10px; padding:8px; background:#0f3460; border-radius:6px; }
+  .bracket-wrap { overflow-x: auto; }
+  .bracket-container { display: flex; flex-direction: column; gap: 20px; }
+  .bracket-group { background:#16213e; border-radius:8px; border:1px solid #2c2c54; overflow:hidden; }
+  .bracket-group-title { background:#0f3460; padding:6px 12px; font-size:11px; color:#f1c40f; font-weight:bold; }
+  .match-row { display:flex; align-items:stretch; border-top:1px solid #1e2a40; }
+  .match-row:first-of-type { border-top:none; }
+  .match-num { width:28px; background:#0a1931; display:flex; align-items:center; justify-content:center; color:#888; font-size:10px; flex-shrink:0; }
+  .match-teams { flex:1; display:flex; flex-direction:column; }
+  .team-slot { padding:5px 10px; display:flex; align-items:center; justify-content:space-between; min-height:28px; }
+  .team-slot.top { border-bottom:1px dashed #2c2c54; }
+  .team-name { font-size:12px; }
+  .team-seed { font-size:10px; color:#888; margin-left:6px; white-space:nowrap; }
+  .slot-winner { background:rgba(46,204,113,0.08); }
+  .slot-ru     { background:rgba(52,152,219,0.08); }
+  .slot-tbd    { background:rgba(230,126,18,0.08); }
+  .match-connector { width:30px; display:flex; align-items:center; justify-content:center; color:#444; font-size:18px; flex-shrink:0; }
+  .legend { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; padding:10px; font-size:11px; color:#aaa; margin-bottom:14px; }
+  .legend-item { display:flex; align-items:center; gap:5px; }
+  .legend-dot  { width:10px; height:10px; border-radius:2px; }
+</style>
+</head>
+<body>
+<h1>2026 AHSAA Boys Soccer</h1>
+<p class="subtitle">Live area standings &amp; projected sub-state brackets &middot; Data: scorbord.com &middot; Structure: AHSAA Sports Book</p>
+<p class="updated">Last updated: April 15, 2026 at 05:48 PM UTC</p>
+<div class="tabs">
+  <div class="tab active" onclick="showClass('c7a', this)">7A</div>
+  <div class="tab " onclick="showClass('c6a', this)">6A</div>
+  <div class="tab " onclick="showClass('c5a', this)">5A</div>
+  <div class="tab " onclick="showClass('c4a', this)">4A</div>
+  <div class="tab " onclick="showClass('c13a', this)">1A-3A</div>
+</div>
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#2ecc71"></div> Area Winner (current)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3498db"></div> Runner-Up (current)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e67e22"></div> Still being decided (TBD)</div>
+</div>
+
+<div id="c7a" class="section">
+  <div class="section-title">CLASS 7A - Boys Soccer</div>
+  <div class="deadline">Area deadline: April 22 &nbsp;&middot;&nbsp; Sub-State R1: April 27-28 &nbsp;&middot;&nbsp; Area winner hosts runner-up</div>
+  <div class="areas-grid col4">
+    <div class="area-box">
+      <div class="area-header">Area 0</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Albertville High School<span class="badge-tbd">TBD</span></td>
+          <td>0-5-0</td>
+          <td>10-12-0</td>
+        </tr>
+        <tr >
+          <td>Austin High School<span class="badge-tbd">TBD</span></td>
+          <td>0-6-0</td>
+          <td>12-7-2</td>
+        </tr>
+        <tr >
+          <td>Central High School (Phenix City)</td>
+          <td>0-6-0</td>
+          <td>1-9-1</td>
+        </tr>
+        <tr >
+          <td>Hillcrest High School (Tuscaloosa)</td>
+          <td>0-4-0</td>
+          <td>4-7-2</td>
+        </tr>
+        <tr >
+          <td>JAG (Johnson Abernathy Graetz) High School</td>
+          <td>0-6-0</td>
+          <td>0-11-0</td>
+        </tr>
+        <tr >
+          <td>Mary G. Montgomery High School</td>
+          <td>0-8-0</td>
+          <td>7-10-2</td>
+        </tr>
+        <tr >
+          <td>Oak Mountain High School</td>
+          <td>0-5-0</td>
+          <td>1-13-6</td>
+        </tr>
+        <tr >
+          <td>Tuscaloosa County High School</td>
+          <td>0-4-0</td>
+          <td>1-8-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 1</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Robertsdale High School<span class="badge-w">W</span></td>
+          <td>1-5-0</td>
+          <td>4-9-1</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 2</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Bob Jones High School<span class="badge-tbd">TBD</span></td>
+          <td>2-3-0</td>
+          <td>13-5-1</td>
+        </tr>
+        <tr >
+          <td>Hoover High School<span class="badge-tbd">TBD</span></td>
+          <td>2-3-0</td>
+          <td>13-4-3</td>
+        </tr>
+        <tr >
+          <td>Opelika High School</td>
+          <td>2-3-0</td>
+          <td>11-6-1</td>
+        </tr>
+        <tr >
+          <td>Sparkman High School</td>
+          <td>2-3-0</td>
+          <td>7-14-2</td>
+        </tr>
+        <tr >
+          <td>Alma Bryant High School</td>
+          <td>2-6-0</td>
+          <td>5-13-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 3</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Grissom High School<span class="badge-tbd">TBD</span></td>
+          <td>3-1-0</td>
+          <td>10-8-3</td>
+        </tr>
+        <tr >
+          <td>James Clemens High School<span class="badge-tbd">TBD</span></td>
+          <td>3-1-0</td>
+          <td>10-5-2</td>
+        </tr>
+        <tr >
+          <td>Hewitt-Trussville High School</td>
+          <td>3-2-0</td>
+          <td>11-3-6</td>
+        </tr>
+        <tr >
+          <td>Smiths Station High School</td>
+          <td>3-2-0</td>
+          <td>15-7-1</td>
+        </tr>
+        <tr >
+          <td>Daphne High School</td>
+          <td>3-3-0</td>
+          <td>8-11-0</td>
+        </tr>
+        <tr >
+          <td>Foley High School</td>
+          <td>3-3-0</td>
+          <td>14-6-3</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 4</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Huntsville High School<span class="badge-w">W</span></td>
+          <td>4-0-0</td>
+          <td>10-6-3</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Prattville High School<span class="badge-ru">RU</span></td>
+          <td>4-1-0</td>
+          <td>11-6-4</td>
+        </tr>
+        <tr >
+          <td>Dothan High School</td>
+          <td>4-3-0</td>
+          <td>10-5-4</td>
+        </tr>
+        <tr >
+          <td>Baker High School</td>
+          <td>4-4-0</td>
+          <td>4-8-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 5</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Florence High School<span class="badge-tbd">TBD</span></td>
+          <td>5-0-0</td>
+          <td>18-1-1</td>
+        </tr>
+        <tr >
+          <td>Thompson High School<span class="badge-tbd">TBD</span></td>
+          <td>5-0-0</td>
+          <td>14-3-3</td>
+        </tr>
+        <tr >
+          <td>Vestavia Hills High School</td>
+          <td>5-0-0</td>
+          <td>19-2-3</td>
+        </tr>
+        <tr >
+          <td>Fairhope High School</td>
+          <td>5-1-0</td>
+          <td>13-6-0</td>
+        </tr>
+        <tr >
+          <td>Montgomery Academy</td>
+          <td>5-1-0</td>
+          <td>8-8-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 6</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Auburn High School<span class="badge-w">W</span></td>
+          <td>6-0-0</td>
+          <td>15-2-2</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Davidson High School<span class="badge-ru">RU</span></td>
+          <td>6-1-0</td>
+          <td>10-10-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 7</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Enterprise High School<span class="badge-tbd">TBD</span></td>
+          <td>7-0-0</td>
+          <td>17-3-1</td>
+        </tr>
+        <tr >
+          <td>McGill-Toolen Catholic High School<span class="badge-tbd">TBD</span></td>
+          <td>7-0-0</td>
+          <td>14-8-0</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="bracket-title">7A 16-team Sub-State Bracket -- Round 1 (April 27-28)</div>
+  <div class="bracket-wrap">
+  <div class="bracket-container">
+    <div class="bracket-group">
+      <div class="bracket-group-title">TOP HALF -- R1 winners advance to R2</div>
+      <div class="match-row">
+        <div class="match-num">1</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Robertsdale High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A1 Winner - 1-5-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Hoover High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A2 Runner-Up - 2-3-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">2</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Huntsville High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A4 Winner - 4-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">James Clemens High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A3 Runner-Up - 3-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">3</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Bob Jones High School / Hoover High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A2 Winner - 2-3-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 1 Runner-Up</span>
+          <span class="team-seed">A1 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">4</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Grissom High School / James Clemens High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A3 Winner - 3-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Prattville High School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A4 Runner-Up - 4-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">BOTTOM HALF -- R1 winners advance to R2</div>
+      <div class="match-row">
+        <div class="match-num">5</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Florence High School / Thompson High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A5 Winner - 5-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Davidson High School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A6 Runner-Up - 6-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">6</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 8 Winner</span>
+          <span class="team-seed">A8 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">McGill-Toolen Catholic High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A7 Runner-Up - 7-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">7</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Auburn High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A6 Winner - 6-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Thompson High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A5 Runner-Up - 5-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">8</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Enterprise High School / McGill-Toolen Catholic High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A7 Winner - 7-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 8 Runner-Up</span>
+          <span class="team-seed">A8 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div id="c6a" class="section">
+  <div class="section-title">CLASS 6A - Boys Soccer</div>
+  <div class="deadline">Area deadline: April 18 &nbsp;&middot;&nbsp; Sub-State R1: April 23-25 &nbsp;&middot;&nbsp; Area winner hosts runner-up</div>
+  <div class="areas-grid col4">
+    <div class="area-box">
+      <div class="area-header">Area 0</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>A. H. Parker High School<span class="badge-tbd">TBD</span></td>
+          <td>0-4-0</td>
+          <td>0-12-0</td>
+        </tr>
+        <tr >
+          <td>Baldwin County High School<span class="badge-tbd">TBD</span></td>
+          <td>0-4-0</td>
+          <td>4-16-1</td>
+        </tr>
+        <tr >
+          <td>Benjamin Russell High School</td>
+          <td>0-3-0</td>
+          <td>3-6-3</td>
+        </tr>
+        <tr >
+          <td>Bessemer City High School</td>
+          <td>0-6-0</td>
+          <td>4-13-3</td>
+        </tr>
+        <tr >
+          <td>Clay Chalkville High School</td>
+          <td>0-2-0</td>
+          <td>3-6-0</td>
+        </tr>
+        <tr >
+          <td>Lee High School (Huntsville)</td>
+          <td>0-5-0</td>
+          <td>0-12-0</td>
+        </tr>
+        <tr >
+          <td>Mae Jemison High School</td>
+          <td>0-5-0</td>
+          <td>0-12-0</td>
+        </tr>
+        <tr >
+          <td>Mortimer Jordan High School</td>
+          <td>0-5-0</td>
+          <td>5-14-1</td>
+        </tr>
+        <tr >
+          <td>Murphy High School</td>
+          <td>0-4-0</td>
+          <td>2-5-1</td>
+        </tr>
+        <tr >
+          <td>Shades Valley High School</td>
+          <td>0-3-0</td>
+          <td>2-12-0</td>
+        </tr>
+        <tr >
+          <td>Southside High School</td>
+          <td>0-2-0</td>
+          <td>9-9-2</td>
+        </tr>
+        <tr >
+          <td>Spain Park High School</td>
+          <td>0-5-0</td>
+          <td>5-12-2</td>
+        </tr>
+        <tr >
+          <td>Woodlawn High School</td>
+          <td>0-4-0</td>
+          <td>1-8-1</td>
+        </tr>
+        <tr >
+          <td>Percy Julian High School</td>
+          <td>0-0-0</td>
+          <td>1-2-0</td>
+        </tr>
+        <tr >
+          <td>Stanhope Elmore High School</td>
+          <td>0-0-0</td>
+          <td>1-14-1</td>
+        </tr>
+        <tr >
+          <td>Wetumpka High School</td>
+          <td>0-0-0</td>
+          <td>4-5-3</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 1</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Pinson Valley High School<span class="badge-w">W</span></td>
+          <td>1-1-0</td>
+          <td>11-8-0</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Chilton County High School<span class="badge-tbd">RU?</span></td>
+          <td>1-2-0</td>
+          <td>10-5-3</td>
+        </tr>
+        <tr >
+          <td>Fort Payne High School</td>
+          <td>1-2-0</td>
+          <td>6-10-1</td>
+        </tr>
+        <tr >
+          <td>Pell City High School</td>
+          <td>1-2-0</td>
+          <td>13-6-3</td>
+        </tr>
+        <tr >
+          <td>Park Crossing High School</td>
+          <td>1-3-0</td>
+          <td>4-5-1</td>
+        </tr>
+        <tr >
+          <td>Russell County High School</td>
+          <td>1-3-0</td>
+          <td>3-5-0</td>
+        </tr>
+        <tr >
+          <td>Decatur High School</td>
+          <td>1-4-0</td>
+          <td>3-11-1</td>
+        </tr>
+        <tr >
+          <td>Central High School (Tuscaloosa)</td>
+          <td>1-5-0</td>
+          <td>2-8-1</td>
+        </tr>
+        <tr >
+          <td>Paul W. Bryant High School</td>
+          <td>1-5-0</td>
+          <td>1-10-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 2</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Saraland High School<span class="badge-w">W</span></td>
+          <td>2-1-0</td>
+          <td>6-1-3</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Gulf Shores High School<span class="badge-tbd">RU?</span></td>
+          <td>2-2-0</td>
+          <td>15-6-4</td>
+        </tr>
+        <tr >
+          <td>Huffman High School</td>
+          <td>2-2-0</td>
+          <td>4-11-1</td>
+        </tr>
+        <tr >
+          <td>Columbia High School</td>
+          <td>2-3-0</td>
+          <td>6-10-0</td>
+        </tr>
+        <tr >
+          <td>Muscle Shoals High School</td>
+          <td>2-3-0</td>
+          <td>5-12-2</td>
+        </tr>
+        <tr >
+          <td>Theodore High School</td>
+          <td>2-3-0</td>
+          <td>6-10-1</td>
+        </tr>
+        <tr >
+          <td>Chelsea High School</td>
+          <td>2-4-0</td>
+          <td>13-4-2</td>
+        </tr>
+        <tr >
+          <td>Jackson-Olin High School</td>
+          <td>2-4-0</td>
+          <td>4-5-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 3</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Gadsden City High School<span class="badge-w">W</span></td>
+          <td>3-0-0</td>
+          <td>14-5-0</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Gardendale High School<span class="badge-ru">RU</span></td>
+          <td>3-1-0</td>
+          <td>14-5-2</td>
+        </tr>
+        <tr >
+          <td>Minor High School</td>
+          <td>3-2-0</td>
+          <td>6-5-2</td>
+        </tr>
+        <tr >
+          <td>Buckhorn High School</td>
+          <td>3-3-0</td>
+          <td>10-11-1</td>
+        </tr>
+        <tr >
+          <td>Hueytown High School</td>
+          <td>3-3-0</td>
+          <td>9-4-0</td>
+        </tr>
+        <tr >
+          <td>Jasper High School</td>
+          <td>3-3-0</td>
+          <td>10-8-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 4</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Athens High School<span class="badge-tbd">TBD</span></td>
+          <td>4-0-0</td>
+          <td>8-7-1</td>
+        </tr>
+        <tr >
+          <td>Calera High School<span class="badge-tbd">TBD</span></td>
+          <td>4-0-0</td>
+          <td>11-6-2</td>
+        </tr>
+        <tr >
+          <td>Mountain Brook High School</td>
+          <td>4-0-0</td>
+          <td>12-6-4</td>
+        </tr>
+        <tr >
+          <td>Oxford High School</td>
+          <td>4-0-0</td>
+          <td>9-5-3</td>
+        </tr>
+        <tr >
+          <td>Pike Road High School</td>
+          <td>4-0-0</td>
+          <td>12-5-2</td>
+        </tr>
+        <tr >
+          <td>Spanish Fort High School</td>
+          <td>4-0-0</td>
+          <td>13-3-3</td>
+        </tr>
+        <tr >
+          <td>Cullman High School</td>
+          <td>4-1-0</td>
+          <td>10-5-2</td>
+        </tr>
+        <tr >
+          <td>Pelham High School</td>
+          <td>4-1-0</td>
+          <td>19-2-1</td>
+        </tr>
+        <tr >
+          <td>Brookwood High School</td>
+          <td>4-2-0</td>
+          <td>8-9-3</td>
+        </tr>
+        <tr >
+          <td>Hartselle High School</td>
+          <td>4-2-0</td>
+          <td>11-6-4</td>
+        </tr>
+        <tr >
+          <td>McAdory High School</td>
+          <td>4-2-0</td>
+          <td>14-2-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 5</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Homewood High School<span class="badge-w">W</span></td>
+          <td>5-0-0</td>
+          <td>18-1-3</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Briarwood Christian School<span class="badge-tbd">RU?</span></td>
+          <td>5-1-0</td>
+          <td>10-7-5</td>
+        </tr>
+        <tr >
+          <td>Helena High School</td>
+          <td>5-1-0</td>
+          <td>11-5-4</td>
+        </tr>
+        <tr >
+          <td>St. Paul's Episcopal School</td>
+          <td>5-1-0</td>
+          <td>15-1-3</td>
+        </tr>
+        <tr >
+          <td>Hazel Green High School</td>
+          <td>5-2-0</td>
+          <td>15-5-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 6</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Northridge High School<span class="badge-w">W</span></td>
+          <td>6-0-0</td>
+          <td>17-5-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 7</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Randolph School<span class="badge-w">W</span></td>
+          <td>7-0-0</td>
+          <td>12-10-0</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="bracket-title">6A 32-team Sub-State Bracket -- Round 1 (April 23-25)</div>
+  <div class="bracket-wrap">
+  <div class="bracket-container">
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 1 -- Areas 5-8</div>
+      <div class="match-row">
+        <div class="match-num">1</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Homewood High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A5 Winner - 5-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 6 Runner-Up</span>
+          <span class="team-seed">A6 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">2</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 8 Winner</span>
+          <span class="team-seed">A8 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 7 Runner-Up</span>
+          <span class="team-seed">A7 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">3</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Northridge High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A6 Winner - 6-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Briarwood Christian School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A5 Runner-Up - 5-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">4</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Randolph School<span class="badge-w">W</span></span>
+          <span class="team-seed">A7 Winner - 7-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 8 Runner-Up</span>
+          <span class="team-seed">A8 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 2 -- Areas 1-4</div>
+      <div class="match-row">
+        <div class="match-num">5</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Pinson Valley High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A1 Winner - 1-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Gulf Shores High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A2 Runner-Up - 2-2-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">6</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Athens High School / Calera High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Winner - 4-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Gardendale High School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A3 Runner-Up - 3-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">7</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Saraland High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A2 Winner - 2-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Chilton County High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A1 Runner-Up - 1-2-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">8</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Gadsden City High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A3 Winner - 3-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Calera High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Runner-Up - 4-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 3 -- Areas 13-16</div>
+      <div class="match-row">
+        <div class="match-num">9</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 13 Winner</span>
+          <span class="team-seed">A13 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 14 Runner-Up</span>
+          <span class="team-seed">A14 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">10</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 16 Winner</span>
+          <span class="team-seed">A16 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 15 Runner-Up</span>
+          <span class="team-seed">A15 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">11</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 14 Winner</span>
+          <span class="team-seed">A14 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 13 Runner-Up</span>
+          <span class="team-seed">A13 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">12</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 15 Winner</span>
+          <span class="team-seed">A15 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 16 Runner-Up</span>
+          <span class="team-seed">A16 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 4 -- Areas 9-12</div>
+      <div class="match-row">
+        <div class="match-num">13</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 9 Winner</span>
+          <span class="team-seed">A9 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 10 Runner-Up</span>
+          <span class="team-seed">A10 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">14</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 12 Winner</span>
+          <span class="team-seed">A12 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 11 Runner-Up</span>
+          <span class="team-seed">A11 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">15</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 10 Winner</span>
+          <span class="team-seed">A10 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 9 Runner-Up</span>
+          <span class="team-seed">A9 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">16</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 11 Winner</span>
+          <span class="team-seed">A11 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 12 Runner-Up</span>
+          <span class="team-seed">A12 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div id="c5a" class="section">
+  <div class="section-title">CLASS 5A - Boys Soccer</div>
+  <div class="deadline">Area deadline: April 18 &nbsp;&middot;&nbsp; Sub-State R1: April 23-25 &nbsp;&middot;&nbsp; Area winner hosts runner-up</div>
+  <div class="areas-grid col4">
+    <div class="area-box">
+      <div class="area-header">Area 0</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Andalusia High School<span class="badge-tbd">TBD</span></td>
+          <td>0-2-0</td>
+          <td>3-5-3</td>
+        </tr>
+        <tr >
+          <td>Arab High School<span class="badge-tbd">TBD</span></td>
+          <td>0-4-0</td>
+          <td>2-14-2</td>
+        </tr>
+        <tr >
+          <td>Ardmore High School</td>
+          <td>0-3-0</td>
+          <td>1-4-0</td>
+        </tr>
+        <tr >
+          <td>Beauregard High School</td>
+          <td>0-1-0</td>
+          <td>1-6-1</td>
+        </tr>
+        <tr >
+          <td>Ben C. Rain High School</td>
+          <td>0-3-0</td>
+          <td>0-3-0</td>
+        </tr>
+        <tr >
+          <td>Booker T. Washington Magnet</td>
+          <td>0-2-0</td>
+          <td>0-5-0</td>
+        </tr>
+        <tr >
+          <td>Carver High School (Birmingham)</td>
+          <td>0-1-0</td>
+          <td>7-8-1</td>
+        </tr>
+        <tr >
+          <td>Crossville High School</td>
+          <td>0-3-0</td>
+          <td>8-9-1</td>
+        </tr>
+        <tr >
+          <td>Demopolis High School</td>
+          <td>0-2-0</td>
+          <td>1-5-0</td>
+        </tr>
+        <tr >
+          <td>Elberta High School</td>
+          <td>0-2-0</td>
+          <td>1-6-2</td>
+        </tr>
+        <tr >
+          <td>Greenville High School</td>
+          <td>0-2-0</td>
+          <td>0-2-0</td>
+        </tr>
+        <tr >
+          <td>Headland High School</td>
+          <td>0-2-0</td>
+          <td>1-5-0</td>
+        </tr>
+        <tr >
+          <td>Lawrence County High School</td>
+          <td>0-2-0</td>
+          <td>0-4-1</td>
+        </tr>
+        <tr >
+          <td>Leflore Magnet High School</td>
+          <td>0-4-0</td>
+          <td>0-4-0</td>
+        </tr>
+        <tr >
+          <td>Moody High School</td>
+          <td>0-4-0</td>
+          <td>1-16-1</td>
+        </tr>
+        <tr >
+          <td>St. Clair County High School</td>
+          <td>0-4-0</td>
+          <td>0-9-0</td>
+        </tr>
+        <tr >
+          <td>Westbrook Christian School</td>
+          <td>0-3-0</td>
+          <td>2-10-1</td>
+        </tr>
+        <tr >
+          <td>Eufaula High School</td>
+          <td>0-0-0</td>
+          <td>4-3-1</td>
+        </tr>
+        <tr >
+          <td>Holtville High School</td>
+          <td>0-0-0</td>
+          <td>0-6-0</td>
+        </tr>
+        <tr >
+          <td>Vigor High School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 1</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Brewbaker Tech High School<span class="badge-tbd">TBD</span></td>
+          <td>1-1-0</td>
+          <td>14-4-3</td>
+        </tr>
+        <tr >
+          <td>Elmore County High School<span class="badge-tbd">TBD</span></td>
+          <td>1-1-0</td>
+          <td>2-4-0</td>
+        </tr>
+        <tr >
+          <td>Boaz High School</td>
+          <td>1-2-0</td>
+          <td>10-8-3</td>
+        </tr>
+        <tr >
+          <td>Jacksonville High School</td>
+          <td>1-2-0</td>
+          <td>9-8-3</td>
+        </tr>
+        <tr >
+          <td>Ramsay High School</td>
+          <td>1-2-0</td>
+          <td>1-5-1</td>
+        </tr>
+        <tr >
+          <td>Center Point High School</td>
+          <td>1-3-0</td>
+          <td>1-4-0</td>
+        </tr>
+        <tr >
+          <td>Citronelle High School</td>
+          <td>1-3-0</td>
+          <td>3-7-1</td>
+        </tr>
+        <tr >
+          <td>Fairview High School</td>
+          <td>1-3-0</td>
+          <td>9-4-1</td>
+        </tr>
+        <tr >
+          <td>Valley High School</td>
+          <td>1-3-0</td>
+          <td>7-8-1</td>
+        </tr>
+        <tr >
+          <td>West Point High School</td>
+          <td>1-3-0</td>
+          <td>2-9-1</td>
+        </tr>
+        <tr >
+          <td>Sipsey Valley High School</td>
+          <td>1-5-0</td>
+          <td>2-8-0</td>
+        </tr>
+        <tr >
+          <td>Shelby County High School</td>
+          <td>1-6-0</td>
+          <td>3-15-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 2</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Russellville High School<span class="badge-w">W</span></td>
+          <td>2-0-0</td>
+          <td>9-5-0</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Bayside Academy<span class="badge-tbd">RU?</span></td>
+          <td>2-1-0</td>
+          <td>4-8-0</td>
+        </tr>
+        <tr >
+          <td>Carroll High School</td>
+          <td>2-1-0</td>
+          <td>11-3-5</td>
+        </tr>
+        <tr >
+          <td>Scottsboro High School</td>
+          <td>2-1-0</td>
+          <td>8-8-3</td>
+        </tr>
+        <tr >
+          <td>Westminster Christian Academy</td>
+          <td>2-1-0</td>
+          <td>2-10-1</td>
+        </tr>
+        <tr >
+          <td>Priceville High School</td>
+          <td>2-2-0</td>
+          <td>6-9-3</td>
+        </tr>
+        <tr >
+          <td>Montevallo High School</td>
+          <td>2-3-0</td>
+          <td>4-7-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 3</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Guntersville High School<span class="badge-tbd">TBD</span></td>
+          <td>3-0-0</td>
+          <td>17-4-1</td>
+        </tr>
+        <tr >
+          <td>Sylacauga High School<span class="badge-tbd">TBD</span></td>
+          <td>3-0-0</td>
+          <td>12-3-3</td>
+        </tr>
+        <tr >
+          <td>East Limestone High School</td>
+          <td>3-1-0</td>
+          <td>16-5-0</td>
+        </tr>
+        <tr >
+          <td>UMS-Wright Preparatory School</td>
+          <td>3-3-0</td>
+          <td>9-6-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 4</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Brewer High School<span class="badge-tbd">TBD</span></td>
+          <td>4-0-0</td>
+          <td>13-6-0</td>
+        </tr>
+        <tr >
+          <td>Charles Henderson High School<span class="badge-tbd">TBD</span></td>
+          <td>4-0-0</td>
+          <td>17-2-3</td>
+        </tr>
+        <tr >
+          <td>Douglas High School</td>
+          <td>4-0-0</td>
+          <td>12-8-1</td>
+        </tr>
+        <tr >
+          <td>John Carroll Catholic High School</td>
+          <td>4-0-0</td>
+          <td>12-6-2</td>
+        </tr>
+        <tr >
+          <td>Lincoln High School</td>
+          <td>4-0-0</td>
+          <td>17-3-0</td>
+        </tr>
+        <tr >
+          <td>Marbury High School</td>
+          <td>4-0-0</td>
+          <td>10-5-3</td>
+        </tr>
+        <tr >
+          <td>Leeds High School</td>
+          <td>4-2-0</td>
+          <td>8-12-1</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 5</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>St. Michael Catholic High School<span class="badge-w">W</span></td>
+          <td>5-1-0</td>
+          <td>13-8-3</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Northside High School<span class="badge-ru">RU</span></td>
+          <td>5-2-0</td>
+          <td>13-3-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 6</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Faith Academy<span class="badge-tbd">TBD</span></td>
+          <td>6-0-0</td>
+          <td>13-4-2</td>
+        </tr>
+        <tr >
+          <td>Springville High School<span class="badge-tbd">TBD</span></td>
+          <td>6-0-0</td>
+          <td>14-1-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 7</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Indian Springs School<span class="badge-w">W</span></td>
+          <td>7-0-0</td>
+          <td>13-4-2</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="bracket-title">5A 32-team Sub-State Bracket -- Round 1 (April 23-25)</div>
+  <div class="bracket-wrap">
+  <div class="bracket-container">
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 1 -- Areas 5-8</div>
+      <div class="match-row">
+        <div class="match-num">1</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">St. Michael Catholic High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A5 Winner - 5-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Springville High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A6 Runner-Up - 6-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">2</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 8 Winner</span>
+          <span class="team-seed">A8 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 7 Runner-Up</span>
+          <span class="team-seed">A7 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">3</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Faith Academy / Springville High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A6 Winner - 6-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Northside High School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A5 Runner-Up - 5-2-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">4</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Indian Springs School<span class="badge-w">W</span></span>
+          <span class="team-seed">A7 Winner - 7-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 8 Runner-Up</span>
+          <span class="team-seed">A8 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 2 -- Areas 1-4</div>
+      <div class="match-row">
+        <div class="match-num">5</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Brewbaker Tech High School / Elmore County High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A1 Winner - 1-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Bayside Academy<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A2 Runner-Up - 2-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">6</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Brewer High School / Charles Henderson High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Winner - 4-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Sylacauga High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A3 Runner-Up - 3-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">7</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Russellville High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A2 Winner - 2-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Elmore County High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A1 Runner-Up - 1-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">8</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Guntersville High School / Sylacauga High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A3 Winner - 3-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Charles Henderson High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Runner-Up - 4-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 3 -- Areas 13-16</div>
+      <div class="match-row">
+        <div class="match-num">9</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 13 Winner</span>
+          <span class="team-seed">A13 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 14 Runner-Up</span>
+          <span class="team-seed">A14 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">10</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 16 Winner</span>
+          <span class="team-seed">A16 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 15 Runner-Up</span>
+          <span class="team-seed">A15 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">11</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 14 Winner</span>
+          <span class="team-seed">A14 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 13 Runner-Up</span>
+          <span class="team-seed">A13 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">12</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 15 Winner</span>
+          <span class="team-seed">A15 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 16 Runner-Up</span>
+          <span class="team-seed">A16 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">QUADRANT 4 -- Areas 9-12</div>
+      <div class="match-row">
+        <div class="match-num">13</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 9 Winner</span>
+          <span class="team-seed">A9 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 10 Runner-Up</span>
+          <span class="team-seed">A10 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">14</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 12 Winner</span>
+          <span class="team-seed">A12 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 11 Runner-Up</span>
+          <span class="team-seed">A11 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">15</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 10 Winner</span>
+          <span class="team-seed">A10 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 9 Runner-Up</span>
+          <span class="team-seed">A9 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">16</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 11 Winner</span>
+          <span class="team-seed">A11 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 12 Runner-Up</span>
+          <span class="team-seed">A12 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div id="c4a" class="section">
+  <div class="section-title">CLASS 4A - Boys Soccer</div>
+  <div class="deadline">Area deadline: April 22 &nbsp;&middot;&nbsp; Sub-State R1: April 27-28 &nbsp;&middot;&nbsp; Area winner hosts runner-up</div>
+  <div class="areas-grid col4">
+    <div class="area-box">
+      <div class="area-header">Area 0</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>American Christian Academy<span class="badge-tbd">TBD</span></td>
+          <td>0-6-0</td>
+          <td>1-9-2</td>
+        </tr>
+        <tr >
+          <td>Anniston High School<span class="badge-tbd">TBD</span></td>
+          <td>0-3-0</td>
+          <td>0-6-0</td>
+        </tr>
+        <tr >
+          <td>Booker T. Washington High School</td>
+          <td>0-6-0</td>
+          <td>0-7-0</td>
+        </tr>
+        <tr >
+          <td>Cherokee County High School</td>
+          <td>0-2-0</td>
+          <td>0-8-1</td>
+        </tr>
+        <tr >
+          <td>East Lawrence High School</td>
+          <td>0-2-0</td>
+          <td>0-3-0</td>
+        </tr>
+        <tr >
+          <td>Geneva High School</td>
+          <td>0-5-0</td>
+          <td>0-9-0</td>
+        </tr>
+        <tr >
+          <td>Talladega High School</td>
+          <td>0-4-0</td>
+          <td>1-9-1</td>
+        </tr>
+        <tr >
+          <td>West Limestone High School</td>
+          <td>0-6-0</td>
+          <td>0-11-0</td>
+        </tr>
+        <tr >
+          <td>Wilson High School</td>
+          <td>0-4-0</td>
+          <td>0-9-0</td>
+        </tr>
+        <tr >
+          <td>Ashville High School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 1</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Etowah High School<span class="badge-tbd">TBD</span></td>
+          <td>1-2-0</td>
+          <td>2-3-0</td>
+        </tr>
+        <tr >
+          <td>Madison County High School<span class="badge-tbd">TBD</span></td>
+          <td>1-2-0</td>
+          <td>1-4-0</td>
+        </tr>
+        <tr >
+          <td>Brooks High School</td>
+          <td>1-3-0</td>
+          <td>3-5-0</td>
+        </tr>
+        <tr >
+          <td>Cleburne County High School</td>
+          <td>1-3-0</td>
+          <td>3-4-1</td>
+        </tr>
+        <tr >
+          <td>Danville High School</td>
+          <td>1-3-0</td>
+          <td>1-8-0</td>
+        </tr>
+        <tr >
+          <td>Hamilton High School</td>
+          <td>1-3-0</td>
+          <td>2-5-0</td>
+        </tr>
+        <tr >
+          <td>Orange Beach High School</td>
+          <td>1-3-0</td>
+          <td>7-5-4</td>
+        </tr>
+        <tr >
+          <td>Satsuma High School</td>
+          <td>1-3-0</td>
+          <td>5-8-4</td>
+        </tr>
+        <tr >
+          <td>Pike County High School</td>
+          <td>1-4-0</td>
+          <td>1-7-0</td>
+        </tr>
+        <tr >
+          <td>Loveless Academic Magnet Program</td>
+          <td>1-6-0</td>
+          <td>1-8-1</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 2</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>New Brockton High School<span class="badge-w">W</span></td>
+          <td>2-3-0</td>
+          <td>4-7-4</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Holt High School<span class="badge-tbd">RU?</span></td>
+          <td>2-4-0</td>
+          <td>4-14-1</td>
+        </tr>
+        <tr >
+          <td>New Hope High School</td>
+          <td>2-4-0</td>
+          <td>10-6-2</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 3</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Oneonta High School<span class="badge-w">W</span></td>
+          <td>3-0-0</td>
+          <td>4-4-2</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Bullock County High School<span class="badge-ru">RU</span></td>
+          <td>3-2-0</td>
+          <td>3-3-0</td>
+        </tr>
+        <tr >
+          <td>Tarrant High School</td>
+          <td>3-3-0</td>
+          <td>8-4-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 4</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>St. John Paul II Catholic High School<span class="badge-tbd">TBD</span></td>
+          <td>4-0-0</td>
+          <td>8-5-1</td>
+        </tr>
+        <tr >
+          <td>St. Luke's Episcopal School<span class="badge-tbd">TBD</span></td>
+          <td>4-0-0</td>
+          <td>10-6-2</td>
+        </tr>
+        <tr >
+          <td>Munford High School</td>
+          <td>4-1-0</td>
+          <td>11-3-1</td>
+        </tr>
+        <tr >
+          <td>Hokes Bluff High School</td>
+          <td>4-2-0</td>
+          <td>7-5-0</td>
+        </tr>
+        <tr >
+          <td>Fultondale High School</td>
+          <td>4-3-0</td>
+          <td>13-10-1</td>
+        </tr>
+        <tr >
+          <td>Montgomery Catholic Preparatory School</td>
+          <td>4-5-0</td>
+          <td>5-12-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 5</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Trinity Presbyterian School<span class="badge-w">W</span></td>
+          <td>5-1-0</td>
+          <td>9-4-1</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Haleyville High School<span class="badge-ru">RU</span></td>
+          <td>5-3-0</td>
+          <td>8-5-1</td>
+        </tr>
+        <tr >
+          <td>Tallassee High School</td>
+          <td>5-4-0</td>
+          <td>13-5-4</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 6</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>White Plains<span class="badge-w">W</span></td>
+          <td>6-0-0</td>
+          <td>11-7-2</td>
+        </tr>
+        <tr class="runnerup">
+          <td>West Morgan High School<span class="badge-ru">RU</span></td>
+          <td>6-1-0</td>
+          <td>10-8-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 7</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Westminster School at Oak Mountain<span class="badge-w">W</span></td>
+          <td>7-0-0</td>
+          <td>14-3-1</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 8</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Dale County High School<span class="badge-tbd">TBD</span></td>
+          <td>8-0-0</td>
+          <td>11-3-0</td>
+        </tr>
+        <tr >
+          <td>Mars Hill Bible School<span class="badge-tbd">TBD</span></td>
+          <td>8-0-0</td>
+          <td>8-7-1</td>
+        </tr>
+        <tr >
+          <td>St. James High School</td>
+          <td>8-0-0</td>
+          <td>14-2-0</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="bracket-title">4A 16-team Sub-State Bracket -- Round 1 (April 27-28)</div>
+  <div class="bracket-wrap">
+  <div class="bracket-container">
+    <div class="bracket-group">
+      <div class="bracket-group-title">TOP HALF -- R1 winners advance to R2</div>
+      <div class="match-row">
+        <div class="match-num">1</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Etowah High School / Madison County High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A1 Winner - 1-2-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Holt High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A2 Runner-Up - 2-4-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">2</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">St. John Paul II Catholic High School / St. Luke's Episcopal School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Winner - 4-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Bullock County High School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A3 Runner-Up - 3-2-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">3</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">New Brockton High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A2 Winner - 2-3-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Madison County High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A1 Runner-Up - 1-2-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">4</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Oneonta High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A3 Winner - 3-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">St. Luke's Episcopal School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Runner-Up - 4-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">BOTTOM HALF -- R1 winners advance to R2</div>
+      <div class="match-row">
+        <div class="match-num">5</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Trinity Presbyterian School<span class="badge-w">W</span></span>
+          <span class="team-seed">A5 Winner - 5-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">West Morgan High School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A6 Runner-Up - 6-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">6</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Dale County High School / Mars Hill Bible School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A8 Winner - 8-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 7 Runner-Up</span>
+          <span class="team-seed">A7 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">7</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">White Plains<span class="badge-w">W</span></span>
+          <span class="team-seed">A6 Winner - 6-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Haleyville High School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A5 Runner-Up - 5-3-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">8</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Westminster School at Oak Mountain<span class="badge-w">W</span></span>
+          <span class="team-seed">A7 Winner - 7-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Mars Hill Bible School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A8 Runner-Up - 8-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div id="c13a" class="section">
+  <div class="section-title">CLASS 1A-3A - Boys Soccer</div>
+  <div class="deadline">Area deadline: April 22 &nbsp;&middot;&nbsp; Sub-State R1: April 27-28 &nbsp;&middot;&nbsp; Area winner hosts runner-up</div>
+  <div class="areas-grid col4">
+    <div class="area-box">
+      <div class="area-header">Area 0</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Alabama Christian Academy<span class="badge-tbd">TBD</span></td>
+          <td>0-2-0</td>
+          <td>2-4-1</td>
+        </tr>
+        <tr >
+          <td>Alabama School of Cyber Technology and Engineering<span class="badge-tbd">TBD</span></td>
+          <td>0-3-0</td>
+          <td>1-3-0</td>
+        </tr>
+        <tr >
+          <td>Ariton High School</td>
+          <td>0-4-0</td>
+          <td>0-7-1</td>
+        </tr>
+        <tr >
+          <td>Barbour County High School</td>
+          <td>0-4-0</td>
+          <td>1-4-0</td>
+        </tr>
+        <tr >
+          <td>Cornerstone Schools of Alabama</td>
+          <td>0-3-0</td>
+          <td>0-4-0</td>
+        </tr>
+        <tr >
+          <td>Elkmont High School</td>
+          <td>0-7-0</td>
+          <td>1-12-0</td>
+        </tr>
+        <tr >
+          <td>George W. Long High School</td>
+          <td>0-2-0</td>
+          <td>2-6-1</td>
+        </tr>
+        <tr >
+          <td>Highland Home High School</td>
+          <td>0-4-0</td>
+          <td>0-4-0</td>
+        </tr>
+        <tr >
+          <td>Holy Family Cristo Rey High School</td>
+          <td>0-3-0</td>
+          <td>1-4-0</td>
+        </tr>
+        <tr >
+          <td>Holy Spirit Catholic School</td>
+          <td>0-2-0</td>
+          <td>0-3-0</td>
+        </tr>
+        <tr >
+          <td>Northside Methodist</td>
+          <td>0-3-0</td>
+          <td>0-4-0</td>
+        </tr>
+        <tr >
+          <td>Pike Liberal Arts School</td>
+          <td>0-4-0</td>
+          <td>0-5-0</td>
+        </tr>
+        <tr >
+          <td>Prattville Christian</td>
+          <td>0-2-0</td>
+          <td>0-6-0</td>
+        </tr>
+        <tr >
+          <td>St. Bernard Preparatory School</td>
+          <td>0-2-0</td>
+          <td>0-3-0</td>
+        </tr>
+        <tr >
+          <td>Whitesburg Christian Academy</td>
+          <td>0-4-0</td>
+          <td>1-7-0</td>
+        </tr>
+        <tr >
+          <td>Autauga Academy</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+        <tr >
+          <td>Autaugaville High School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+        <tr >
+          <td>Bayshore Christian School</td>
+          <td>0-0-0</td>
+          <td>1-2-0</td>
+        </tr>
+        <tr >
+          <td>Breakthrough Charter School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+        <tr >
+          <td>Cottage Hill Christian Academy</td>
+          <td>0-0-0</td>
+          <td>0-6-0</td>
+        </tr>
+        <tr >
+          <td>Donoho School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+        <tr >
+          <td>Goshen High School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+        <tr >
+          <td>Mobile Christian School</td>
+          <td>0-0-0</td>
+          <td>0-2-0</td>
+        </tr>
+        <tr >
+          <td>Thomasville High School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+        <tr >
+          <td>Washington County High School</td>
+          <td>0-0-0</td>
+          <td>0-0-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 1</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Glenwood School<span class="badge-w">W</span></td>
+          <td>1-1-0</td>
+          <td>1-6-0</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Faith Christian School<span class="badge-ru">RU</span></td>
+          <td>1-2-0</td>
+          <td>3-5-0</td>
+        </tr>
+        <tr >
+          <td>Sylvania High School</td>
+          <td>1-3-0</td>
+          <td>2-7-1</td>
+        </tr>
+        <tr >
+          <td>Childersburg High School</td>
+          <td>1-5-0</td>
+          <td>2-13-0</td>
+        </tr>
+        <tr >
+          <td>Glencoe High School</td>
+          <td>1-5-0</td>
+          <td>1-9-0</td>
+        </tr>
+        <tr >
+          <td>Clements High School</td>
+          <td>1-6-0</td>
+          <td>7-10-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 3</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Saks High School<span class="badge-w">W</span></td>
+          <td>3-1-0</td>
+          <td>3-6-0</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Coosa Christian School<span class="badge-ru">RU</span></td>
+          <td>3-2-0</td>
+          <td>4-7-0</td>
+        </tr>
+        <tr >
+          <td>J.B. Pennington High School</td>
+          <td>3-4-0</td>
+          <td>4-12-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 4</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Lee-Scott Academy<span class="badge-tbd">TBD</span></td>
+          <td>4-1-0</td>
+          <td>6-7-0</td>
+        </tr>
+        <tr >
+          <td>Weaver High School<span class="badge-tbd">TBD</span></td>
+          <td>4-1-0</td>
+          <td>8-3-1</td>
+        </tr>
+        <tr >
+          <td>Tanner High School</td>
+          <td>4-3-0</td>
+          <td>14-8-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 5</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Altamont High School<span class="badge-tbd">TBD</span></td>
+          <td>5-1-0</td>
+          <td>6-11-2</td>
+        </tr>
+        <tr >
+          <td>Tharptown High School<span class="badge-tbd">TBD</span></td>
+          <td>5-1-0</td>
+          <td>12-4-0</td>
+        </tr>
+        <tr >
+          <td>Tuscaloosa Academy</td>
+          <td>5-1-0</td>
+          <td>12-7-1</td>
+        </tr>
+        <tr >
+          <td>Geraldine High School</td>
+          <td>5-2-0</td>
+          <td>9-7-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 7</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr >
+          <td>Madison Academy<span class="badge-tbd">TBD</span></td>
+          <td>7-0-0</td>
+          <td>14-2-0</td>
+        </tr>
+        <tr >
+          <td>Susan Moore High School<span class="badge-tbd">TBD</span></td>
+          <td>7-0-0</td>
+          <td>15-2-1</td>
+        </tr>
+        <tr >
+          <td>Collinsville High School</td>
+          <td>7-1-0</td>
+          <td>16-8-0</td>
+        </tr>
+      </table>
+    </div>
+    <div class="area-box">
+      <div class="area-header">Area 11</div>
+      <table class="area-table">
+        <tr><th>School</th><th>Area</th><th>Overall</th></tr>
+        <tr class="winner">
+          <td>Providence Christian High School<span class="badge-w">W</span></td>
+          <td>11-0-0</td>
+          <td>13-5-0</td>
+        </tr>
+        <tr class="runnerup">
+          <td>Houston Academy<span class="badge-ru">RU</span></td>
+          <td>11-1-0</td>
+          <td>12-7-2</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="bracket-title">1A-3A 16-team Sub-State Bracket -- Round 1 (April 27-28)</div>
+  <div class="bracket-wrap">
+  <div class="bracket-container">
+    <div class="bracket-group">
+      <div class="bracket-group-title">TOP HALF -- R1 winners advance to R2</div>
+      <div class="match-row">
+        <div class="match-num">1</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Glenwood School<span class="badge-w">W</span></span>
+          <span class="team-seed">A1 Winner - 1-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 2 Runner-Up</span>
+          <span class="team-seed">A2 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">2</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Lee-Scott Academy / Weaver High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Winner - 4-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Coosa Christian School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A3 Runner-Up - 3-2-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">3</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 2 Winner</span>
+          <span class="team-seed">A2 Winner</span>
+        </div>
+        <div class="team-slot  slot-ru">
+          <span class="team-name">Faith Christian School<span class="badge-ru">RU</span></span>
+          <span class="team-seed">A1 Runner-Up - 1-2-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">4</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-winner">
+          <span class="team-name">Saks High School<span class="badge-w">W</span></span>
+          <span class="team-seed">A3 Winner - 3-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Weaver High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A4 Runner-Up - 4-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+
+    <div class="bracket-group">
+      <div class="bracket-group-title">BOTTOM HALF -- R1 winners advance to R2</div>
+      <div class="match-row">
+        <div class="match-num">5</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Altamont High School / Tharptown High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A5 Winner - 5-1-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 6 Runner-Up</span>
+          <span class="team-seed">A6 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">6</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 8 Winner</span>
+          <span class="team-seed">A8 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Susan Moore High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A7 Runner-Up - 7-0-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">7</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">TBD - Area 6 Winner</span>
+          <span class="team-seed">A6 Winner</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">Tharptown High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A5 Runner-Up - 5-1-0 area</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+      <div class="match-row">
+        <div class="match-num">8</div>
+        <div class="match-teams">
+        <div class="team-slot top slot-tbd">
+          <span class="team-name">Madison Academy / Susan Moore High School<span class="badge-tbd">TBD</span></span>
+          <span class="team-seed">A7 Winner - 7-0-0 area</span>
+        </div>
+        <div class="team-slot  slot-tbd">
+          <span class="team-name">TBD - Area 8 Runner-Up</span>
+          <span class="team-seed">A8 Runner-Up</span>
+        </div>
+        </div>
+        <div class="match-connector">&rarr;</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<script>
+function showClass(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
