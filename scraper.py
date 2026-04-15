@@ -329,8 +329,6 @@ CSS = """
   .area-table td { padding: 4px 6px; border-top: 1px solid #1e2a40; font-size: 11px; }
   .area-table tr.winner td { color: #2ecc71; font-weight: bold; }
   .area-table tr.runnerup td { color: #3498db; }
-  .area-table tr.winner td:first-child::before { content: "\ud83e\udd47 "; }
-  .area-table tr.runnerup td:first-child::before { content: "\ud83e\udd48 "; }
   .badge-w  { display:inline-block; background:#2ecc71; color:#000; font-size:9px; border-radius:3px; padding:1px 4px; margin-left:4px; font-weight:bold; }
   .badge-ru { display:inline-block; background:#3498db; color:#000; font-size:9px; border-radius:3px; padding:1px 4px; margin-left:4px; font-weight:bold; }
   .badge-tbd{ display:inline-block; background:#e67e22; color:#000; font-size:9px; border-radius:3px; padding:1px 4px; margin-left:4px; font-weight:bold; }
