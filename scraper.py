@@ -129,9 +129,9 @@ def fetch_areas(class_id):
     for team_el in teams_list.find_all(class_="team"):
         name_el   = team_el.find(class_="name")
         record_el = team_el.find(class_="record")
-        conf_el   = team_el.find(class_="conference")
+        
 
-        if not (name_el and record_el and conf_el):
+        if not (name_el and record_el):
             continue
 
         name = name_el.get_text(strip=True)
@@ -142,6 +142,14 @@ def fetch_areas(class_id):
         overall  = parse_record(overall_el.get_text(strip=True))  if overall_el  else (0, 0, 0)
         area_rec = parse_record(area_rec_el.get_text(strip=True)) if area_rec_el else (0, 0, 0)
 
+        # Find the area label element -- must NOT be inside .record
+        conf_el = None
+        for c in team_el.find_all(class_="conference"):
+            if record_el not in list(c.parents):
+                conf_el = c
+                break
+        if not conf_el:
+            continue
         area_text = conf_el.get_text(strip=True)
         m = re.search(r"(\d+)", area_text)
         if not m:
